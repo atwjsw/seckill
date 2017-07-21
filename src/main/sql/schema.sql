@@ -1,42 +1,42 @@
--- Êı¾İ¿â³õÊ¼»¯½Å±¾  --
+-- æ•°æ®åº“åˆå§‹åŒ–è„šæœ¬  --
 
--- ´´½¨Êı¾İ¿â --
+-- åˆ›å»ºæ•°æ®åº“ --
 
 CREATE DATABASE seckill;
 
 use seckill;
 
 CREATE TABLE seckill (
-	seckill_id bigint NOT NULL AUTO_INCREMENT COMMENT 'ÉÌÆ·¿â´æid',
-	name varchar(120) NOT NULL COMMENT 'ÉÌÆ·Ãû³Æ',
-	number int NOT NULL COMMENT '¿â´æÊıÁ¿',
-	start_time timestamp NOT NULL COMMENT 'ÃëÉ±¿ªÊ¼Ê±¼ä',
-	end_time timestamp NOT NULL COMMENT 'ÃëÉ±½áÊøÊ±¼ä',
-	create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '´´½¨Ê±¼ä',
+	seckill_id bigint NOT NULL AUTO_INCREMENT COMMENT 'å•†å“åº“å­˜id',
+	name varchar(120) NOT NULL COMMENT 'å•†å“åç§°',
+	number int NOT NULL COMMENT 'åº“å­˜æ•°é‡',
+	create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'åˆ›å»ºæ—¶é—´',
+	start_time timestamp NOT NULL COMMENT 'ç§’æ€å¼€å§‹æ—¶é—´',
+	end_time timestamp NOT NULL COMMENT 'ç§’æ€ç»“æŸæ—¶é—´',
 	PRIMARY KEY (seckill_id),
 	key idx_start_time(start_time),
 	key idx_create_time(create_time)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='ÃëÉ±¿â´æ±í';
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='ç§’æ€åº“å­˜è¡¨';
 
---³õÊ¼»¯Êı¾İ--
-insert into seckill(name,number,start_time,end_time) 
-values 
-	('1000ÔªÃëÉ±iphone6',100,'2016-07-07 00:00:00','2016-08-08 00:00:00'),
-	('500ÔªÃëÉ±ipad2',200,'2016-07-10 00:00:00','2016-08-10 00:00:00'),
-	('300ÔªÃëÉ±Ğ¡Ã×4',300,'2015-11-01 00:00:00','2015-11-02 00:00:00'),
-	('200ÔªÃëÉ±ºìÃ×note',400,'2015-11-01 00:00:00','2015-11-02 00:00:00');
+--åˆå§‹åŒ–æ•°æ®--
+insert into seckill(name,number,start_time,end_time)
+values
+	('1000å…ƒç§’æ€iphone6',100,'2017-07-21 00:00:00','2017-08-21 00:00:00'),
+	('500å…ƒç§’æ€ipad2',200,'2017-07-21 00:00:00','2017-08-21 00:00:00'),
+	('300å…ƒç§’æ€å°ç±³4',300,'2015-11-01 00:00:00','2015-11-02 00:00:00'),
+	('200å…ƒç§’æ€çº¢ç±³note',400,'2015-11-01 00:00:00','2015-11-02 00:00:00');
 
---ÃëÉ±³É¹¦Ã÷Ï¸±í
+--ç§’æ€æˆåŠŸæ˜ç»†è¡¨
 
 CREATE TABLE success_killed(
-	seckill_id bigint NOT NULL COMMENT 'ÃëÉ±ÉÌÆ·id',
-	user_phone bigint NOT NULL COMMENT 'ÓÃ»§ÊÖ»úºÅ',
-	state tinyint NOT NULL DEFAULT -1 COMMENT '×´Ì¬±êÊ¶£º-1£ºÎŞĞ§ 0:³É¹¦ 1£ºÒÑ¸¶¿î',
-	create_time timestamp NOT NULL COMMENT '´´½¨Ê±¼ä',
-	PRIMARY KEY (seckill_id, user_phone), /*ÁªºÏÖ÷¼ü*/
+	seckill_id bigint NOT NULL COMMENT 'ç§’æ€å•†å“id',
+	user_phone bigint NOT NULL COMMENT 'ç”¨æˆ·æ‰‹æœºå·',
+	state tinyint NOT NULL DEFAULT -1 COMMENT 'çŠ¶æ€æ ‡è¯†ï¼š-1ï¼šæ— æ•ˆ 0:æˆåŠŸ 1ï¼šå·²ä»˜æ¬¾',
+	create_time timestamp NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+	PRIMARY KEY (seckill_id, user_phone), /*è”åˆä¸»é”®*/
 	key idx_create_time(create_time)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÃëÉ±³É¹¦Ã÷Ï¸±í';
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ç§’æ€æˆåŠŸæ˜ç»†è¡¨';
 
--- Á¬½ÓÊı¾İ¿â¿ØÖÆÌ¨
+-- è¿æ¥æ•°æ®åº“æ§åˆ¶å°
 mysql -uroot -p
 show create table success_killed\G
