@@ -24,27 +24,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * v1.0
  * @author ewendia
  */
 @Controller //@Service @Component
-@RequestMapping("/seckill") //url:/ƒ£øÈ/◊ ‘¥/{id}/œ∏∑÷ /seckill/list
+@RequestMapping("/seckill") //url:/Ê®°Âùó/ËµÑÊ∫ê/{id}/ÁªÜÂàÜ /seckill/list
 public class SeckillController {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private SeckillService seckillService;
-	
+
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model){
-		//ªÒ»°¡–±Ì“≥
+		//Ëé∑ÂèñÂàóË°®È°µ
 		System.out.println("in list");
 		List<Seckill> list = seckillService.getSeckillList();
 		model.addAttribute("list", list);
 		//list.jsp + model = ModelAndView
-		return "list"; //WEB-INF/jsp/"list".jsp		
+		return "list"; //WEB-INF/jsp/"list".jsp
 	}
-	
+
 	@RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
 	public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
 		System.out.println("in detail");
@@ -56,57 +57,57 @@ public class SeckillController {
 			return "forward:/seckill/list";
 		}
 		model.addAttribute("seckill", seckill);
-		return "detail";		
+		return "detail";
 	}
-	
+
 	//ajax json
 	@RequestMapping(value = "/{seckillId}/exposer", method = RequestMethod.POST,
-			 produces = "application/json;charset=UTF-8")
+			produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public SeckillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId) {
 		SeckillResult<Exposer> result;
 		try {
-			Exposer exposer = seckillService.exposeSeckillUrl(seckillId);			
+			Exposer exposer = seckillService.exposeSeckillUrl(seckillId);
 			result = new SeckillResult<Exposer>(true, exposer);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result = new SeckillResult<Exposer>(false, e.getMessage());
 		}
-		return result;	
+		return result;
 	}
-	
+
 	@RequestMapping(value = "/{seckillId}/{md5}/execution", method = RequestMethod.POST,
-			 produces = "application/json;charset=UTF-8")
-	@ResponseBody	
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public SeckillResult<SeckillExecution> execute(
-			@PathVariable("seckillId") Long seckillId, 
-			@PathVariable("md5") String md5, 
+			@PathVariable("seckillId") Long seckillId,
+			@PathVariable("md5") String md5,
 			@CookieValue(value="killPhone",required = false) Long userPhone) {
-		
-		//“≤ø…“‘≤…”√SpringMVC valid
+
+		//‰πüÂèØ‰ª•ÈááÁî®SpringMVC valid
 		if(userPhone == null) {
-			return new SeckillResult<SeckillExecution>(false, "Œ¥◊¢≤·");
-		}		
+			return new SeckillResult<SeckillExecution>(false, "Êú™Ê≥®ÂÜå");
+		}
 		try {
 			SeckillExecution execution = seckillService.executeSeckill(seckillId, userPhone, md5);
 			return new SeckillResult<SeckillExecution>(true, execution);
 		} catch (RepeatKillException e) {
-			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT_KILL); 
+			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT_KILL);
 			return new SeckillResult<SeckillExecution>(true, execution);
 		} catch (SeckillCloseException e) {
-			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.END); 
+			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.END);
 			return new SeckillResult<SeckillExecution>(true, execution);
 		} catch (SeckillException e) {
 			logger.error(e.getMessage(), e);
-			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR); 
+			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
 			return new SeckillResult<SeckillExecution>(true, execution);
-		}		
+		}
 	}
-	
+
 	@RequestMapping(value="/time/now", method=RequestMethod.GET)
 	@ResponseBody
 	public SeckillResult<Long> time() {
 		Date now = new Date();
-		return new SeckillResult<Long>(true, now.getTime());		
+		return new SeckillResult<Long>(true, now.getTime());
 	}
 }
