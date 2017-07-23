@@ -110,4 +110,10 @@ public class SeckillController {
 		Date now = new Date();
 		return new SeckillResult<Long>(true, now.getTime());
 	}
+
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@ResponseBody
+	public String login() {
+		return "redirect:login";
+	}
 }

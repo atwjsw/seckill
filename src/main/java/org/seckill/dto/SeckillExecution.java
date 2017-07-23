@@ -4,20 +4,20 @@ import org.seckill.entity.SuccessKilled;
 import org.seckill.enums.SeckillStateEnum;
 
 /**
- * ·â×°ÃëÉ±Ö´ĞĞºóµÄ½á¹û
+ * å°è£…ç§’æ€æ‰§è¡Œåçš„ç»“æœ
  * @author ewendia
  */
 public class SeckillExecution {
-	
+
 	private long seckillId;
-	
-	//ÃëÉ±Ö´ĞĞ½á¹û×´Ì¬
+
+	//ç§’æ€æ‰§è¡Œç»“æœçŠ¶æ€
 	private int state;
-	
-	//×´Ì¬±íÊ¾
+
+	//çŠ¶æ€è¡¨ç¤º
 	private String stateInfo;
-	
-	//ÃëÉ±³É¹¦¶ÔÏó
+
+	//ç§’æ€æˆåŠŸå¯¹è±¡
 	private SuccessKilled successKilled;
 
 	public SeckillExecution(long seckillId, SeckillStateEnum stateEnum, SuccessKilled successKilled) {
@@ -25,8 +25,8 @@ public class SeckillExecution {
 		this.state = stateEnum.getState();
 		this.stateInfo = stateEnum.getStateInfo();
 		this.successKilled = successKilled;
-	}	
-	
+	}
+
 	public SeckillExecution(long seckillId, SeckillStateEnum stateEnum) {
 		this.seckillId = seckillId;
 		this.state = stateEnum.getState();
@@ -69,5 +69,5 @@ public class SeckillExecution {
 	public String toString() {
 		return "SeckillExecution [seckillId=" + seckillId + ", state=" + state + ", stateInfo=" + stateInfo
 				+ ", successKilled=" + successKilled + "]";
-	}	
+	}
 }

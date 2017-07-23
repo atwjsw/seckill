@@ -1,11 +1,11 @@
 package org.seckill.dto;
 
 /**
- * 暴露秒杀地址dto
- * @author ewendia 
+ * 鏆撮湶绉掓潃鍦板潃dto
+ * @author ewendia
  */
 public class Exposer {
-	
+
 	@Override
 	public String toString() {
 		return "Exposer [exposed=" + exposed + ", md5=" + md5 + ", seckillId=" + seckillId + ", now=" + now + ", start="
@@ -13,16 +13,16 @@ public class Exposer {
 	}
 
 	private boolean exposed;
-	
+
 	private String md5;
-	
+
 	private long seckillId;
-	
-	//系统当前时间毫秒
+
+	//绯荤粺褰撳墠鏃堕棿姣
 	private long now;
-	
+
 	private long start;
-	
+
 	private long end;
 
 	public Exposer(boolean exposed, String md5, long seckillId) {
@@ -91,6 +91,6 @@ public class Exposer {
 	public void setEnd(long end) {
 		this.end = end;
 	}
-	
+
 
 }

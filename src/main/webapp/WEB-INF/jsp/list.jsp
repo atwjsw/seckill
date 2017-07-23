@@ -13,6 +13,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">
 					<h2>秒杀列表</h2>
+					<br>
+					<h3>Hello <security:authentication property="principal.username"/></h3>
 				</div>
 				<div class="panel-body">
 					<table class="table table-hover">
@@ -48,9 +50,10 @@
 						</tbody>					
 					</table>
 				</div>
-			</div>		
+				<a href="/static/j_spring_security_logout">登出</a>
+			</div>
 		</div>
-	
+
 	</body>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>	

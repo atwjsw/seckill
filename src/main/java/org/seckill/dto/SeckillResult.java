@@ -1,16 +1,17 @@
 package org.seckill.dto;
 /**
+ * v1.0
  * @author ewendia
- * 封装json结果
+ * 灏佽json缁撴灉
  * @param <T>
  */
-//所有ajax请求返回类型，封装json结果
+//鎵�鏈塧jax璇锋眰杩斿洖绫诲瀷锛屽皝瑁卝son缁撴灉
 public class SeckillResult<T> {
-	
+
 	private boolean success;
-	
+
 	private T data;
-	
+
 	private String error;
 
 	public SeckillResult(boolean success, T data) {
@@ -45,5 +46,5 @@ public class SeckillResult<T> {
 
 	public void setError(String error) {
 		this.error = error;
-	}		
+	}
 }
